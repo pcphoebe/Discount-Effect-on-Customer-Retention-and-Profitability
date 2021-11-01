@@ -1,0 +1,475 @@
+---
+title: "APAN_5300 - Final Project Submission - Group 11"
+author: "Phoebe Chen, Stephen Davis, Tim Deng, Alexandra Jehle, Zhikun Yuan"
+date: "4/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, comment="", warning = FALSE, message = FALSE, tidy.opts=list(width.cutoff=55), tidy = TRUE)
+library(tidyverse)
+library(data.table)
+library(DT)
+```
+
+## Part 1:  Research Proposal
+
+### Executive Summary / Abstract
+By partnering with Joe’s Pizza, this study investigates any positive impact of the application of discounts and coupons on profits and customer retention. Specifically, we predict both profits and customer retention will be higher among customers who are offered promotions than those who are not offered a promotion. As the restaurant industry already faces intense competition, the COVID-19 pandemic has further decreased customer loyalty and profitability drastically. Therefore in an attempt to right this metric, the study used simple random sampling to recruit 200 subjects who have previously purchased from Joe’s Pizza restaurant on Grubhub, and each subject was then randomly assigned to either the control group or one of the treatment groups. The study consisted of three treatment groups, where subjects were given a type of discount: free delivery, $5 off, or 10% off. For better comparison, a control group also exists where subjects received no discounts. The subjects were then observed for one year, during which the study will collect data regarding their purchase histories and discount usage. The population of interest for this study is the incentives given by Joe’s Pizza and the samples are the three types of discounts tested in the study. Data collection in this study was focused on static description of objective facts, including the characteristics of each group and  behavioral differences between groups. For statistical analysis of the results, two One-Way Analysis of Variance (ANOVA) models were used to determine any statistically significant differences in profits and customer retention rate between the four groups. This study looks at the effect that the different incentives have on the customer retention rate and the profit margin for the restaurant. Finally, the theoretical and managerial implications were discussed in the discussion therein.
+<br><br><br>
+
+
+### Statement of the Problem
+The restaurant industry is very competitive, and with an increase in the use of third party delivery services allowing consumers access to a plethora of restaurants at their fingertips, consumer retention is an ever increasing concern. Furthermore, as indoor dining has been limited due to the COVID-19 pandemic, restaurants’ profits have become further volatile. 
+<br><br>
+Looking specifically at the pizza industry, there were already numerous competitors with certain industry leaders (e.g., Joe’s Pizza, Pizza Hut, Domino’s Pizza) before the use of third party delivery services. As delivery platforms such as Grubhub entered the market, customer loyalty for the entire industry decreased. And while delivery platforms may increase the restaurants’ sale volumes, restaurants are also forced to share a portion of their revenues, impacting their profitability. Thus, the effects of third party delivery services and the COVID-19 pandemic has impacted not only individual restaurants but the industry as a whole.
+<br><br>
+Thus, the primary objective of this study is to examine whether the use of various incentives has an effect on customer retention within the restaurant industry. A secondary objective is to measure the gross profit from each subsequent sale, accounting for each type of incentive.
+<br><br><br>
+
+### Research Questions and Hypotheses 
+1) <u>Does a free delivery discount positively impact a restaurant’s profitability and customer retention rate?</u>
+<br>
+<i>H0: There is no positive impact on the profitability and customer retention with free delivery
+<br>
+H1: There is a positive impact on the profitability and customer retention with free delivery</i>
+<br><br>
+2) <u>Does a $5 off discount positively impact a restaurant’s profitability and customer retention rate?</u>
+<br>
+<i>H0: There is no positive impact on the profitability and customer retention with $5 off discount
+<br>
+H1: There is a positive impact on the profitability and customer retention with $5 off discount
+<br></i>
+<br><br>
+3) <u>Does a 10% off discount positively impact a restaurant’s profitability and customer retention rate?
+</u>
+<br>
+<i>H0: There is no positive impact on the profitability and customer retention with 10% off discount
+<br>
+H1: There is a positive impact on the profitability and customer retention with 10% off discount
+<br></i>
+<br><br><br>
+
+### Importance of the Study
+In this study, we begin to determine what kind of incentives can increase customer loyalty. Increasing customer loyalty is key to increasing an organization’s profit. As we have chosen to collaborate with Joe’s Pizza, a popular pizza chain in New York City, it is pivotal to have a type of incentive to bring consumers back to their restaurant, as New York is a very competitive market for pizza restaurants. 
+<br><br>
+Hence, we will collect data regarding the number of orders received from each group as well as their profitability before and after this experiment so we can compare and analyze if the discounts created an impact. We hope that the findings from this study can help other Joe’s Pizza improve their profitability and customer retention.
+<br><br>
+In the future, as Joe’s Pizza continues to grow, this study can be referenced to determine the best methods to improve Joe’s Pizza’s market share within the pizza sector of the restaurant industry. 
+<br><br><br>
+
+### Literature Review
+
+The restaurant industry is one marked by fierce competition, tight margins, and a plethora of choices for consumers (Lin, et al., 2015). Visibility to consumers is key to a restaurant’s survival, and due to the ongoing COVID-19 pandemic, the opportunity to provide indoor dining has been restricted and limited by government regulation (Gursoy & Chi, 2020; Bartik et al., 2020). Additionally, increased levels of cannibalization of restaurant sales means consumers who normally purchase in-store have transitioned into mostly online ordering (Collison, 2020). This further increases the need for visibility. One means of increasing a restaurant’s visibility is to utilize online delivery applications (apps) (e.g., DoorDash, Grubhub, UberEats, Postmates), which is becoming increasingly popular among restaurants (Lee et al., 2017).
+<br><br>
+As the number of restaurants joining these delivery apps increases, competition becomes increasingly fierce (Xu & Huang, 2019). A consequence of delivery apps is the depersonalization of restaurants, inhibiting customers from relying on subjective factors, such as ambience and service, when determining a specific restaurant from which to order (Xu & Huang, 2019).
+<br><br>
+In such an environment where consumer’s dining decisions are increasingly rational and less emotional, customer reviews, price-points, and promotions become paramount to an individual restaurant’s survival and customer loyalty (Cha & Seo, 2020). By increasing the number of customers served and/or the total money spent by each customer, restaurants can increase their revenue most effectively (Heo, 2013). As the acquisition of new customers is generally a more expensive endeavor than retaining current customers, investments are better spent in order to incentivize existing customers to remain loyal and return to make additional purchases (Pfeifer, 2004).
+<br><br>
+A variety of tools exist as incentives to stimulate customers’ willingness to complete a purchase. Among these incentives are coupons, rebates, free samples, and loyalty programs (Lin et al., 2015). Lewis (2004) suggests loyalty programs are successful in increasing annual purchasing for a substantial proportion of customers for online merchants. By utilizing concessions in the form of coupons, discounts, and waived delivery fees, we aim to examine any impact that may exist for each concession type on the likelihood of customers returning to complete an additional purchase. Secondarily, we aim to capture the gross profit of each secondary sale that may occur in order to measure any impact each type of incentive may have on a company’s bottomline.
+<br><br><br>
+<i><b>Impact of Third Party Delivery Services on Restaurant Sales</b></i>
+<br>
+With the advent of third party delivery services, even though restaurant sales have gone up, no one seems to be making money (Jiang 2020). Due to the enormous fees that delivery apps impose on restaurants, a few diner owners in New York have filed a class-action lawsuit against numerous companies including DoorDash, Grubhub, UberEats, and Postmates for such unethical practice (Warerkar 2020). Restaurant owners have also admitted that they often have to increase on-app list prices to offset the fee they have to pay to the delivery service companies (Lichtenstein 2020); such action can negatively impact brand loyalty. In addition to fees that restaurants have to pay, customers are also burdened with various types of fees, such as service fees, delivery fees, merchant fees, when ordering deliveries through a third party app; research shows that customers pay from 17% up to 40.5% more than the original restaurant list price when using a service like Seamless or Postmates (Lichtenstein 2020). Heavy fees lead to further decrease in repeating customers as they look for cheaper alternatives rather than the restaurant they are loyal to.  
+<br><br>
+Increasing reliance on third party delivery services has also been aided by the COVID-19 pandemic. However, while those services increase sales for restaurants, it is also drawing away from in-restaurant (Collison 2020). Increased level of cannibalization of restaurant sales means consumers who normally purchase in-store have transitioned to mostly online ordering (Collison 2020). In addition to the burdensome fees placed on each order by the delivery services, restaurants are seeing a decrease in profitability even though sales have increased. Our research seeks to address such phenomenon by studying methods that may improve customer retention for individual restaurants. 
+<br><br><br>
+<i><b>Impact of Third Party Delivery Services on Restaurant Sales</b></i>
+<br>
+With the advent of third party delivery services, even though restaurant sales have gone up, no one seems to be making money (Jiang 2020). Due to the enormous fees that delivery apps impose on restaurants, a few diner owners in New York have filed a class-action lawsuit against numerous companies including DoorDash, Grubhub, UberEats, and Postmates for such unethical practice (Warerkar 2020). Restaurant owners have also admitted that they often have to increase on-app list prices to offset the fee they have to pay to the delivery service companies (Lichtenstein 2020); such action can negatively impact brand loyalty. In addition to fees that restaurants have to pay, customers are also burdened with various types of fees, such as service fees, delivery fees, merchant fees, when ordering deliveries through a third party app; research shows that customers pay from 17% up to 40.5% more than the original restaurant list price when using a service like Seamless or Postmates (Lichtenstein 2020). Heavy fees lead to further decrease in repeating customers as they look for cheaper alternatives rather than the restaurant they are loyal to
+<br><br>
+Increasing reliance on third party delivery services has also been aided by the COVID-19 pandemic. However, while those services increase sales for restaurants, it is also drawing away from in-restaurant (Collison 2020). Increased level of cannibalization of restaurant sales means consumers who normally purchase in-store have transitioned to mostly online ordering (Collison 2020). In addition to the burdensome fees placed on each order by the delivery services, restaurants are seeing a decrease in profitability even though sales have increased. Our research seeks to address such phenomenon by studying methods that may improve customer retention for individual restaurants. 
+<br><br><br>
+<i><b>Importance of Customer Retention</b></i>
+<br>
+As third party delivery apps continue to take huge chunks out of restaurant profits, it is time to focus on customer retention. There are many studies conducted that have shown the benefits of retaining existing customers over acquiring new ones, most notably, keeping long-term customers can generate incremental profits for restaurants (Chapman, 2017). Specifically, it has been shown that increasing customer retention rate by 5% may increase profits by over 25% (Reichheld & Schefter 2000). Retaining existing customers is often easier and cheaper than acquiring new customers, so focusing on retention can decrease churn, or customer turnover, thus reducing the need for restaurants to continue to acquire new customers. Additionally, loyal customers’ lifetime value is often much higher compared to one-time customers, which means they tend to spend more and can be regarded as a steady revenue generator (Chapman 2017). Loyal customers also often become brand ambassadors; they bring on new customers through word-of-mouth referrals, the cheapest and most effective form for restaurants to acquire new customers (Chapman 2017).
+<br><br><br>
+<i><b>Influence of loyalty Programs on Customer Retention</b></i>
+<br>
+The topics of whether loyalty programs, such as discounts, reward system, or coupons, can have a positive impact on customer retention, and the best strategies for developing an appropriate loyalty program are often discussed. One study suggests that loyalty programs are successful in increasing annual purchasing for a substantial proportion of customers when it conducts a 12-month period of research on an online merchant (Lewis 2004).
+<br><br><br>
+
+### Research Plan
+
+
+#### Population of Interest
+The population of interest for this study is the incentives given by Joe’s Pizza. We plan to look at the effect that the different incentives have on the customer retention rate and the profit margin for the restaurant.  
+
+#### Sample Selection
+This study will consist of four groups: a control group that will receive no discount, a group that will receive free delivery, a group that will receive a $5 off discount, and a group that will receive a 10% off discount. These groups have been chosen to analyze not only whether discounts in general will have an effect on customer retention and profitability, but also what type of discounts may have the greatest impact.
+
+#### Sample Size
+The sample size of the study will be 200 customers, who will be randomly assigned to each of the four groups (50 customers in each). Random assignment will minimize any effect of other confounding variables such as differences in each customer’s usual pizza order frequency.
+
+
+
+#### Operational Procedures
+1) Calculate current customer retention rate by dividing total number of New York City Grubhub accounts that purchased at least twice from Joe’s Pizza by total number of accounts that have ever purchased from Joe’s Pizza
+2) Collect information on Joe Pizza’s current profitability 
+3) Use simple random sampling to select 200 New York City Grubhub accounts who have purchased from Joe’s Pizza in the past
+4) Use simple random assignment to assign 50 subjects into each control and treatment group
+5) Issue corresponding discount to each subject on Grubhub
+6) Track number of discounts used and number of times each subject returned to order from Joe’s Pizza on Grubhub
+7) Calculate and compare profitability and customer retention rate for each control and treatment group
+
+### Brief Schedule
+The study will be held over a 1 year (12 month) period. This will allow for an optimal amount of time for the data to be collected and to analyze consumers’ behavior. 200 randomly selected Grubhub accounts will either be assigned to be a part of the control group receiving nothing or the free delivery, $5 off or 10% off groups. Over the course of the next 12 months, we will track the customer retention based on the incentive assigned, or lack thereof, that the customer was given. This will be calculated by looking at the amount of times the customer ordered from Joe’s Pizza after their first purchase. Then, we will look at the profit margin for each of the incentives to see which one is the most cost effective, while increasing the overall profits for Joe’s Pizza. 
+
+
+#### Data Collection
+- New York City Grubhub accounts purchase histories
+- Number of times ordered from Joe’s Pizza on Grubhub per subject before and after the study
+- Percentage of subjects that used their discounts 
+- Joe’s Pizza’s profitability before and after the study
+- Joe’s Pizza’s customer retention rate before and after the study
+
+
+#### Data Security
+In order to calculate customer retention rate, we will have to collect data on each subject’s restaurant purchase histories on Grubhub. This information certainly exists as Grubhub uses it to recommend each user similar restaurants according to their previous orders. However, to ensure the privacy of the subjects, each subject will be indexed from 1 to 200 and referred to using only these indexes so that no other demographic information such as name or age will be recorded. 
+<br><br>
+Furthermore, as we are collaborating with Joe’s Pizza, we will be collecting information regarding the restaurant’s profitability. As a privately owned restaurant, this will be confidential information. Thus, when publishing results for the study, no specific financial numbers should be mentioned. Instead, any differences in profitability should be mentioned as a percentage change.
+
+#### Variables
+There are multitude of variables that will be examined throughout this study: the dependent variables, independent variables and other confounding variables that may affect the results of this study. The two dependent variables are known as our outcome variables, and the 3 levels of independent variables are known as treatment variables. 
+
+#### Outcomes (Dependent Variables)
+- Customer Retention Rate 
+-- As stated in the Operational Procedure, we are looking at the current customer retention rate, which is equal to the number of Grubhub accounts that have purchased at least twice from Joe’s Pizza over the total number of Grubhub accounts that have purchased from Joe’s Pizza. 
+-- We will then calculate this again after the study is completed. It will be calculated for each of the following treatment groups and the control group. 
+- Profitability
+-- We will calculate the profitability of Joe’s Pizza before the study begins. 
+-- Following the study, we will track the profitability 
+
+#### Treatments (Independent Variables)
+- Discount Incentives (3 levels) and the Control 
+-- There are three levels of treatments within the discount incentives. Each of these treatments will be randomly assigned to 200 Grubhub users that have bought from Joe’s Pizza in the past; there will be 50 users assigned to each of the groups. The three discount incentives are as follows:
+--- Free Delivery
+--- $5 Off
+--- 10% Off
+-- The last group is the control group, which is the users who do not receive any incentive. 
+
+
+#### Other Variables
+Some confounding variables may be whether a customer was planning to return to Joe’s Pizza, if the customer that lives in the area, and if the consumer enjoyed the food they ordered the first time. Grubhub may also issue other discounts that were not a part of this study to the subjects that would impact their decisions to order from Joe’s Pizza. 
+
+
+### Statistical Analysis Plan  
+Since our study consists of one independent variable with three levels (the three types of discounts) and two dependent variables (profitability and customer retention rate), with each participant given only one type of discount, we would conduct two One-Way ANOVA tests;  one for each dependent variable. This would allow us to compare the mean profits and customer retention rates between each group while accounting for variance from the mean for each group.
+<br><br>
+One-way analysis of variances popularly known as ANOVA determines whether the statistical difference between two means which are more independent exist (Anderson & Maxwell, 2016). Thus, in this case we will have four groups and we want to determine whether there is a significant difference in customer’s pizza order frequency between each group. It is important to note that ANOVA is an omnibus statistical test that fails to identify the category of groups which are significantly different from one another (Rice & Gaines, 1989). 
+<br><br>
+Using ANOVA can help us understand whether the use of various discounts and coupons has an effect on customer retention and profit margin of restaurants. For Joe’s Pizza to recognize the implications of each group and how the offers have affected their retention, we must  explore potential differences between each group. Through our statistical test, the results should demonstrate which group has a significant impact on customer retention rate as well as profitability. Additionally, the results from our statistical test may help to bring solutions for Joe’s Pizza amidst the deadly pandemic that has terrorized operations of restaurants.
+
+
+
+### Limitations and Uncertainties
+By design, studies exist to gain insights into the probability of future events occurring using historical data as a basis of likelihood. Among the core assumptions surrounding a prediction’s strength is the stability and continuity of the external environment. Holding all external variables constant provides grounds for a robust study. As it turns out, the environment in which this current study is performed is uniquely volatile.
+<br><br>
+The ever-evolving ecosystem provided by the ongoing COVID-19 pandemic poses a substantial risk to the long-term generalizability of this study. Though it may provide valuable, actionable insights in the moment, there is the recognized possibility that results may become rapidly antiquated. Without altering the structural foundation of this study, it is impossible to gauge customer loyalty or retention outside of orders placed through Grubhub. The loyalty status of customers who place orders in person, via direct contact with Joe’s Pizza (e.g., telephone, Joe’s Pizza’s website), or through a different food delivery service cannot be properly recorded. As COVID-19 vaccinations become increasingly prevalent, updated dining regulations will undoubtedly change the quantity of Joe’s Pizza orders placed through Grubhub. Additionally, any expected seasonality trends may impact the means by which customers place orders, potentially further decreasing the volume of Grubhub orders (e.g., a negatively correlated relationship between air temperature and Grubhub orders).
+<br><br>
+Discounting a changing external environment, the timeline during which the study is conducted may also impact the empirical validity of these findings. Concessions granted to customers in treatment groups are valid for 12 months from the date of receipt. This does allow an extended period of time for treatment group customers to place additional orders, however it may present difficulty in confidently determining any causative relationship between concessions and repeat orders.
+<br><br><br>
+
+
+## Part 2:  Simulated Studies
+
+### Scenarios
+Effect size & relationship with the control group: the current restaurant industry average for customer retention rate is 30%, so hypothetically in our control group, 15 out of 50 people would purchase again. Additionally, the average profit margin for pizza restaurants is around 15%, and Joe’s Pizza’s pies cost $21.3 on average, so the profit margin for each pie is $3.2, times 15 people from our control group would be $48 total, then $48/50 ~ $1 for our profitability rate for the control group. So the $1 profitability rate is our baseline for comparison
+A Harvard study mentioned a 5% increase in customer retention means potential increase in  25-95% of profit. 
+
+
+### Research Question 1: Does a free delivery discount positively impact a restaurant’s profitability and customer retention rate?
+
+#### Scenario 1:  No Effect
+
+##### Simulation
+
+```{r q1_scenario1_simulation}
+anova.fn <- function(formula, data) {
+  mod.lm <- lm(formula = formula, data = data)
+  mod.anova <- anova(object = mod.lm)
+  return(mod.anova)
+}
+analyze.experiment_anova <- function(the.dat) {
+  require(data.table)
+  setDT(the.dat)
+  
+  the.test <- anova.fn(Profit~Group, data = the.dat)
+  
+  the.effect <- the.test$`Sum Sq`[1]/the.test$`Sum Sq`[2]
+  p <- the.test$`Pr(>F)`[1]
+  
+  result <- data.table(effect = the.effect, p = p)
+  
+  return(result)
+}
+
+B <- 1000
+sample_size <- 200
+Experiment <- 1:B
+RNGversion(vstr = 3.6)
+set.seed(5)
+Group_delivery_noeffect <- c(rep.int(x = "free_delivery", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+noeffect_sim_delivery <- as.data.table(expand.grid(Experiment = Experiment, Group = Group_delivery_noeffect))
+setorderv(x = noeffect_sim_delivery, cols = c("Experiment", "Group"), order = c(1,1))
+noeffect_sim_delivery[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+noeffect_sim_delivery[Group == "free_delivery", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+
+#delivery results
+noeffect_delivery_exp_results <- noeffect_sim_delivery[, analyze.experiment_anova(the.dat = .SD), 
+                                     keyby = "Experiment"]
+
+```
+
+##### Analysis
+
+```{r q1_scenario1_analysis}
+data.table("Mean Effect" = noeffect_delivery_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = noeffect_delivery_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1-noeffect_delivery_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (noeffect_delivery_exp_results[ ,mean(p<0.05)])*100,
+           "Percentage of False Negatives" = (1-noeffect_delivery_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (noeffect_delivery_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+```
+Based on the results of our simulated data, with the mean effect below our 0.01 threshold, we can conclude that we cannot detect a difference between our treatment group (free delivery) and our control group. A p-value way over 0.05 tells us that there is no difference in profitability rate between our groups. Our conclusion tells us that it would not be in Joe's Pizza's best interest to implement the free delivery promotion as they would lose more money. 
+
+
+#### Scenario 2:  An Expected Effect
+
+##### Simulation
+
+```{r q1_scenario2_simulation}
+B <- 1000
+sample_size <- 200
+RNGversion(vstr = 3.6)
+set.seed(17)
+Experiment <- 1:B
+Group <- c(rep.int(x = "free_delivery", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+sim_delivery <- as.data.table(expand.grid(Experiment = Experiment, Group = Group))
+setorderv(x = sim_delivery, cols = c("Experiment", "Group"), order = c(1,1))
+sim_delivery[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+sim_delivery[Group == "free_delivery", Profit := round(x = rnorm(n = .N, mean = 2.2, sd = 2), digits = 1)]
+
+#delivery results
+delivery_exp_results <- sim_delivery[, analyze.experiment_anova(the.dat = .SD), 
+                       keyby = "Experiment"]
+
+```
+
+##### Analysis
+
+```{r q1_scenario2_analysis}
+
+data.table("Mean Effect" = delivery_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = delivery_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1 - delivery_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (delivery_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of False Negatives" = (1- delivery_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (delivery_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+
+```
+Based on the results of our simulated data, with the mean effect above our 0.01 threshold, we may conclude that we can detect a difference between our treatment group (free delivery) and our control group. With a p-value of 0.04, we can see that there is a significant difference in profitability rate between our groups. Our conclusion tells us that we are able to detect a significant effect through multiple simulations, and the difference between the treatment and control group shows that the free delivery promotion does have an impact on profitability. 
+
+
+### Research Question 2: Does a $5 off discount positively impact a restaurant’s profitability and customer retention rate?
+
+
+#### Scenario 1:  No Effect
+
+##### Simulation
+
+```{r q2_scenario1_simulation}
+RNGversion(vstr = 3.6)
+set.seed(6)
+Group_5off_noeffect <- c(rep.int(x = "5_usd", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+noeffect_sim_5off <- as.data.table(expand.grid(Experiment = Experiment, Group = Group_5off_noeffect))
+setorderv(x = noeffect_sim_delivery, cols = c("Experiment", "Group"), order = c(1,1))
+noeffect_sim_5off[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+noeffect_sim_5off[Group == "5_usd", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+
+#delivery results
+noeffect_5off_exp_results <- noeffect_sim_5off[, analyze.experiment_anova(the.dat = .SD), 
+                                                       keyby = "Experiment"]
+
+```
+
+##### Analysis
+
+```{r q2_scenario1_analysis}
+
+data.table("Mean Effect" = noeffect_5off_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = noeffect_5off_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1 - noeffect_5off_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (noeffect_5off_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of False Negatives" = (1-noeffect_5off_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (noeffect_5off_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+```
+Based on the results of our simulated data, with the mean effect at our 0.01 threshold, we may conclude that we are able to detect a difference between our treatment group ($5 off) and our control group. However, with a p-value way over our threshold of 0.05, we can see that there is no significant difference in profitability rate between our groups. Our findings tell us that it would not be in Joe's Pizza's best interest to implement the 5 dollars off incentive because it does not have an effect on profitability. 
+
+
+#### Scenario 2:  An Expected Effect
+
+##### Simulation
+
+```{r q2_scenario2_simulation}
+#1k experiment
+B <- 1000
+sample_size <- 200
+RNGversion(vstr = 3.6)
+set.seed(18)
+Experiment <- 1:B
+fiveoff_Group <- c(rep.int(x = "5_usd", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+sim_fiveoff <- as.data.table(expand.grid(Experiment = Experiment, Group = fiveoff_Group))
+setorderv(x = sim_fiveoff, cols = c("Experiment", "Group"), order = c(1,1))
+sim_fiveoff[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+sim_fiveoff[Group == "5_usd", Profit := round(x = rnorm(n = .N, mean = 2, sd = 2), digits = 1)]
+
+#delivery results
+fiveoff_exp_results <- sim_fiveoff[, analyze.experiment_anova(the.dat = .SD), 
+                                     keyby = "Experiment"]
+
+
+```
+
+##### Analysis
+
+```{r q2_scenario2_analysis}
+
+data.table("Mean Effect" = fiveoff_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = fiveoff_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1 - fiveoff_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (fiveoff_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of False Negatives" = (1-fiveoff_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (fiveoff_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+
+
+```
+Based on the results of our simulated data, with the mean effect above our 0.01 threshold, we can conclude that we are able to detect an effect in our treatment group ($5 off) when compared to our control group. A p-value over our threshold of 0.05 may tell us that there is no difference in profitability rate between our groups. However, because the mean is 0.068, close to our 0.05 threshold, through one thousand simulations, we may conclude that the five dollar discount incentive may have a significant effect on profitability. 
+
+### Research Question 3: Does a 10% off discount positively impact a restaurant’s profitability and customer retention rate?
+
+
+#### Scenario 1:  No Effect
+
+##### Simulation
+
+```{r q3_scenario1_simulation}
+RNGversion(vstr = 3.6)
+set.seed(23)
+Group_tenperc_noeffect <- c(rep.int(x = "10_perc", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+noeffect_sim_tenperc <- as.data.table(expand.grid(Experiment = Experiment, Group = Group_tenperc_noeffect))
+setorderv(x = noeffect_sim_delivery, cols = c("Experiment", "Group"), order = c(1,1))
+noeffect_sim_tenperc[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+noeffect_sim_tenperc[Group == "10_perc", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+
+#delivery results
+noeffect_tenperc_exp_results <- noeffect_sim_tenperc[, analyze.experiment_anova(the.dat = .SD), 
+                                               keyby = "Experiment"]
+
+
+```
+
+##### Analysis
+
+```{r q3_scenario1_analysis}
+
+data.table("Mean Effect" = noeffect_tenperc_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = noeffect_tenperc_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1 - noeffect_tenperc_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (noeffect_tenperc_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of False Negatives" = (1-noeffect_tenperc_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (noeffect_tenperc_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+
+```
+Based on the results of our simulated data, with the mean effect at our 0.01 threshold, we may conclude that we are able to detect a difference between our treatment group (10% off) and our control group. However, with a p-value way over our threshold of 0.05, we can see that there is no significant difference in profitability rate between our groups. Our findings tell us that it would not be in Joe's Pizza's best interest to implement the 10% off incentive because it does not have an effect on profitability. 
+
+
+
+#### Scenario 2:  An Expected Effect
+
+##### Simulation
+
+```{r q3_scenario2_simulation}
+B <- 1000
+sample_size <- 200
+RNGversion(vstr = 3.6)
+set.seed(30)
+Experiment <- 1:B
+ten_perc_Group <- c(rep.int(x = "10_perc", times = sample_size/4), rep.int(x = "Control", times = sample_size/4))
+
+sim_ten_perc <- as.data.table(expand.grid(Experiment = Experiment, Group = ten_perc_Group))
+setorderv(x = sim_ten_perc, cols = c("Experiment", "Group"), order = c(1,1))
+sim_ten_perc[Group == "Control", Profit := round(x = rnorm(n = .N, mean = 1, sd = 2), digits = 1)]
+sim_ten_perc[Group == "10_perc", Profit := round(x = rnorm(n = .N, mean = 1.8, sd = 2), digits = 1)]
+
+#delivery results
+tenoff_exp_results <- sim_ten_perc[, analyze.experiment_anova(the.dat = .SD), 
+                                   keyby = "Experiment"]
+
+
+```
+
+##### Analysis
+
+```{r q3_scenario2_analysis}
+
+data.table("Mean Effect" = tenoff_exp_results[ ,mean(effect)],
+           "95% Confidence Interval of Mean Effect" = tenoff_exp_results[ ,mean(p)],
+           "Percentage of False Positives" = (1 - tenoff_exp_results[ ,mean(p>0.05)])*100, 
+           "Percentage of True Negatives" = (tenoff_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of False Negatives" = (1-tenoff_exp_results[ ,mean(p<(0.05))])*100,
+           "Percentage of True Positives" = (tenoff_exp_results[ ,mean(p>(0.05))])*100
+           ) 
+
+```
+Based on the results of our simulated data, with the mean effect above our 0.01 threshold, we can conclude that we are able to detect an effect in our treatment group (10% off) when compared to our control group. However, with a p-value over our threshold of 0.05, we cannot conclude that there is a significant difference between the treatment and control group. Therefore, a 10% discount incentive does not have an impact on profitability. 
+
+
+
+## References
+Anderson, S.,  Maxwell, S. (2016). There’s more than one way to conduct a replication study: Beyond statistical significance. Psychological Methods, 21(1), 1.
+<br><br>
+Bartik, A. W., Bertrand, M., Bullen, Z. B., Glaeser, E. L., Luca, M., Staton, C. T. (2020). <i>How are small businesses adjusting ot COVID-19? Early evidence from a survey</i> (No. w26989). National Bureau of Economic Research.
+<br><br>
+Cha, S. S., & Seo, B. K. (2020). The effect of food delivery application on customer loyalty in restaurant. <i>The Journal of Distribution Science</i>, 18(4), 5-12
+<br><br>
+Chapman, J. (2017). <i>The importance of customer retention - an empirical study.</i> Toptal. https://www.toptal.com/finance/venture-capital-consultants/the-importance-of-customer-retention-an-empirical-study
+<br><br>
+Collison, J. (2020). <i>The impact of online food delivery services on restaurant sales</i> [Unpublished manuscript]. Department of Economics, Stanford University.
+<br><br>
+Gilbert A. C., (2018). <i>Marketing Research: Methodological Foundations</i> (12th edition). Earlie Lite Books, Inc.
+<br><br>
+Gursoy, D., Chi, C. G. (2020). Effects of COVID-19 pandemic on hospitality industry: review of the current situations and a research agenda. <i>Journal of Hospitality Marketing & Management</i>, 29(5), 527-529.
+<br><br>
+Heo, C. Y. (2013). Restaurant revenue management. <i>Revenue management for hospitality and tourism.</i> Woodeaton, Oxford: Goodfellow Publishers ltd, 118-129.
+<br><br>
+Jiang, I. (2020, May 17). <i>Food delivery with third-party apps like Grubhub and Uber eats is booming, but no one's making money. Here's why their business is broken.</i> Business Insider. https://www.businessinsider.com/grubhub-uber-eats-postmates-third-party-food-delivery-is-broken-2020-5#:~:text=For%20restaurant%20owners%2C%20third-party,orders%20were%20never%20very%20profitable.&amp;text=Now%2C%20many%20restaurants%20rely%20entirely,services%20typically%20charge%20business%20owners
+<br><br>
+Lee, E., Lee, S., Jeon, Y. J. J. (2017). Factors influencing the behavioral intention to use food delivery apps. <i>Social Behavior and Personality: an international journal, 45</i>(9), 1461-1473.
+<br><br>
+Lewis, M. (2004). The influence of loyalty programs and short-term promotions on customer retention. <i>Journal of Marketing Research, 41</i>(3), 281-292.
+<br><br>
+Lichtenstein, N. (2020, March 17). <i>The hidden cost of food delivery.</i> TechCrunch. https://techcrunch.com/2020/03/16/the-hidden-cost-of-food-delivery/amp/
+<br><br>
+Lin, M. L., Yang, J., Wan, C. (2015). Effect of restaurant discount coupon depth on re-consumption willingness: A moderating role of brand image. <i>Tourism and Hospitality Research, 15</i>(3), 193-205.
+<br><br>
+Pfeifer, P. E. (2005). The optimal ratio of acquisition and retention costs. <i>Journal of Targeting, Measurement and Analysis for Marketing, 13</i>(2), 179-188.
+<br><br>
+Reichheld, F., Schefter, P. (2000, July). <i>The Economics of E-Loyalty.</i> Harvard Business School. https://hbswk.hbs.edu/archive/the-economics-of-e-loyalty
+<br><br>
+Rice, W. R., & Gaines, S. D. (1989). One-way analysis of variance with unequal variances.<i> Proceedings of the National Academy of Sciences, 86</i>(21), 8183-8184.
+<br><br>
+Warerkar, T. (2020, April 14). <i>Diners sue Grubhub and doordash Over "Shocking" Restaurant Fees.</i> NY Eater. https://ny.eater.com/2020/4/14/21220591/nyc-delivery-grubhub-doordash-uber-postmates-lawsuit
+<br><br>
+Xu, X., Huang, Y. (2019). Restaurant information cues, diners’ expectations, and need for cognition: Experimental studies of online-to-offline mobile food ordering. <i>Journal of Retailing and Consumer Services, 51</i>, 231-241.
+<br><br>
