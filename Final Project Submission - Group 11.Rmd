@@ -1,6 +1,6 @@
 ---
 title: "APAN_5300 - Final Project Submission - Group 11"
-author: "Phoebe Chen, Stephen Davis, Tim Deng, Alexandra Jehle, Zhikun Yuan"
+author: " "
 date: "4/15/2021"
 output: html_document
 ---
